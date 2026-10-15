@@ -1,3 +1,3 @@
 # Obed Joshua's Portfolio
 
-you can access my portfolio [here](obedjoshuaportfolio.vercel.app)
+you can access my portfolio [here](https://obedjoshuaportfolio.vercel.app)

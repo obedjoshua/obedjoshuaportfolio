@@ -423,7 +423,24 @@ body {
   transition: all 0.3s;
 }
 
-/* FLOATING MOUSE-FOLLOWING PROJECT PREVIEW CARD POP-UP */
+/* MOBILE INLINE PROJECT IMAGE WRAPPER (HIDDEN ON DESKTOP) */
+.mobile-project-img {
+  display: none;
+  width: 100%;
+  height: 220px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.mobile-project-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* FLOATING MOUSE-FOLLOWING PROJECT PREVIEW CARD POP-UP (DESKTOP) */
 .floating-project-preview {
   position: fixed;
   top: 0;
@@ -838,6 +855,45 @@ body.loading { overflow: hidden; }
     padding: 5px 10px;
   }
 
+  /* HIDE FLOATING MOUSE PREVIEW ON TOUCH SCREENS */
+  .floating-project-preview {
+    display: none !important;
+  }
+
+  /* REVEAL INLINE PROJECT IMAGE ON MOBILE TOP */
+  .mobile-project-img {
+    display: block;
+  }
+
+  .project-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 24px 5vw;
+  }
+
+  .project-info {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .project-title {
+    font-size: 22px;
+  }
+
+  .project-tags {
+    display: block;
+    font-size: 15px;
+    margin-top: 4px;
+  }
+
+  .project-btn {
+    width: 100%;
+    text-align: center;
+  }
+
   /* FOOTER RESPONSIVE CONTAINER & CARD STACKING */
   .site-footer {
     padding: 30px 4vw 60px 4vw;
@@ -886,8 +942,5 @@ body.loading { overflow: hidden; }
     box-sizing: border-box;
   }
 
-  .project-row { flex-direction: column; align-items: flex-start; gap: 15px; padding: 30px 5vw; }
-  .project-title { font-size: 22px; }
-  .project-tags { display: block; font-size: 15px; margin-top: 4px; }
   .linktree-grid { grid-template-columns: 1fr; }
 }

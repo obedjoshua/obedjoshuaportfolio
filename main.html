@@ -1,0 +1,404 @@
+code = """
+import os
+
+# Create the directory structure for a React project if needed, 
+# but for this environment, I'll generate a single-file solution 
+# using Tailwind and React patterns that can be easily rendered.
+
+html_content = \"\"\"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C2 Montreal Recreation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #FFFFFF;
+            overflow-x: hidden;
+        }
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #FF5C7C 0%, #2D2AFF 100%);
+        }
+        .orange-gradient {
+            background: linear-gradient(135deg, #FF5C7C 0%, #FFB86C 100%);
+        }
+        .blue-purple-gradient {
+            background: linear-gradient(135deg, #2D2AFF 0%, #7000FF 100%);
+        }
+        .text-multi-color {
+            background: linear-gradient(90deg, #FF5C7C, #FFB86C, #2D2AFF, #00FF00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .abstract-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.6;
+        }
+        .sidebar-link:hover {
+            color: #FF5C7C;
+        }
+        .get-passes-btn:hover {
+            background-color: #00E600;
+        }
+        .speaker-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .speaker-card {
+            transition: all 0.3s ease;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation Sidebar (Fixed Right) -->
+    <nav class="fixed right-0 top-0 h-screen w-[80px] bg-white border-l border-gray-200 z-50 flex flex-col items-center py-8">
+        <div class="mb-12">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </div>
+        
+        <div class="flex-1 flex flex-col justify-center items-center gap-12 text-sm font-bold uppercase tracking-widest vertical-text">
+            <a href="#" class="sidebar-link">C2 Montreal</a>
+            <a href="#" class="sidebar-link">Our Speakers</a>
+            <a href="#" class="sidebar-link">2023 Programming</a>
+            <a href="#" class="sidebar-link">Good to Know</a>
+            <a href="#" class="sidebar-link">FR</a>
+        </div>
+
+        <button class="get-passes-btn absolute bottom-0 right-0 w-[80px] h-[80px] bg-[#00FF00] flex items-center justify-center transition-colors">
+            <span class="vertical-text font-black text-xs tracking-tighter uppercase">Get Passes</span>
+            <svg class="absolute top-2 right-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+        </button>
+    </nav>
+
+    <!-- Main Content Wrapper -->
+    <main class="mr-[80px]">
+
+        <!-- Hero Section -->
+        <section class="relative min-h-screen flex flex-col lg:flex-row overflow-hidden">
+            <div class="w-full lg:w-[60%] hero-gradient relative flex items-center p-12 lg:p-24 overflow-hidden">
+                <!-- Abstract circles -->
+                <div class="abstract-circle bg-red-400 w-96 h-96 -top-20 -left-20 animate-pulse"></div>
+                <div class="abstract-circle bg-blue-400 w-80 h-80 bottom-10 right-10"></div>
+                
+                <div class="relative z-10">
+                    <h2 class="text-white text-3xl lg:text-5xl font-bold mb-4 tracking-tighter">May 2023</h2>
+                    <h1 class="text-white text-9xl lg:text-[180px] font-black leading-[0.8] tracking-tighter">24-26</h1>
+                </div>
+            </div>
+            
+            <div class="w-full lg:w-[40%] bg-black p-12 lg:p-24 flex flex-col justify-center relative">
+                <!-- Video placeholder -->
+                <div class="absolute top-12 right-12 w-48 aspect-video bg-gray-800 rounded-lg overflow-hidden shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover opacity-80" />
+                </div>
+                
+                <div class="max-w-xs">
+                    <h3 class="text-white text-2xl font-bold mb-6">Canada's creative-business event</h3>
+                    <p class="text-gray-400 text-lg leading-relaxed">
+                        Join us for three days of inspiration, collaboration and celebration at the intersection of commerce and creativity.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Abstract Visual Section (Connect) -->
+        <section class="relative h-screen blue-purple-gradient flex items-center justify-center overflow-hidden">
+            <!-- Large C2 shape (CSS representation) -->
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div class="relative w-[600px] h-[600px]">
+                    <div class="absolute top-0 left-0 w-80 h-80 rounded-full bg-red-500 opacity-40 mix-blend-screen blur-xl"></div>
+                    <div class="absolute bottom-0 right-0 w-80 h-80 rounded-full bg-orange-400 opacity-40 mix-blend-screen blur-xl"></div>
+                    <div class="absolute top-1/4 right-0 w-96 h-96 rounded-full bg-pink-500 opacity-30 mix-blend-screen blur-xl"></div>
+                </div>
+            </div>
+            <h2 class="relative z-10 text-white text-[120px] lg:text-[200px] font-black tracking-tighter reveal-text">Connect.</h2>
+        </section>
+
+        <!-- Combined Lenses Section -->
+        <section class="py-32 px-12 lg:px-24 bg-white text-center">
+            <h2 class="text-multi-color text-5xl lg:text-8xl font-black uppercase tracking-tighter max-w-6xl mx-auto leading-[0.9]">
+                Combined lenses bring the world into sharper focus
+            </h2>
+        </section>
+
+        <!-- Speaker Grid Section -->
+        <section class="py-32 px-12 lg:px-24 bg-[#F5F5F5]">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Speaker Card 1 -->
+                <div class="speaker-card bg-white p-2">
+                    <div class="aspect-square bg-gray-200 overflow-hidden mb-6">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="p-4">
+                        <p class="text-xl font-bold">Dr. Jane Smith</p>
+                        <p class="text-gray-500 text-sm">AI Ethics Lead, Future Labs</p>
+                    </div>
+                </div>
+                <!-- Speaker Card 2 -->
+                <div class="speaker-card bg-white p-2">
+                    <div class="aspect-square bg-gray-200 overflow-hidden mb-6">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="p-4">
+                        <p class="text-xl font-bold">Marcus Vane</p>
+                        <p class="text-gray-500 text-sm">CEO, Green Ventures</p>
+                    </div>
+                </div>
+                <!-- Speaker Card 3 -->
+                <div class="speaker-card bg-white p-2">
+                    <div class="aspect-square bg-gray-200 overflow-hidden mb-6">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="p-4">
+                        <p class="text-xl font-bold">Elena Rodriguez</p>
+                        <p class="text-gray-500 text-sm">Creative Director, Neo Media</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Change-Makers Section -->
+        <section class="py-32 bg-[#F5F5F5] border-t border-gray-200">
+            <div class="flex justify-center gap-12 mb-20 text-xl font-bold uppercase tracking-tight overflow-x-auto px-12">
+                <a href="#" class="text-black border-b-2 border-black">Talks</a>
+                <a href="#" class="text-gray-400">Labs</a>
+                <a href="#" class="text-gray-400">Performances</a>
+                <a href="#" class="text-gray-400">Open-ended play</a>
+            </div>
+            <div class="px-12 lg:px-24 text-center">
+                <h2 class="text-6xl lg:text-[100px] font-black uppercase tracking-tighter leading-[0.8] mb-12">
+                    Through the eyes of change-makers
+                </h2>
+            </div>
+        </section>
+
+        <!-- Experiences Section -->
+        <section class="py-32 bg-[#F5F5F5]">
+            <div class="px-12 lg:px-24">
+                <h2 class="text-4xl lg:text-6xl font-black mb-20 max-w-4xl tracking-tight">
+                    Conversations and experiences that will inspire change
+                </h2>
+                
+                <!-- Highlights Carousel Placeholder -->
+                <div class="flex gap-8 overflow-hidden mb-12">
+                    <div class="min-w-[400px] h-[500px] bg-white relative group cursor-pointer overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                        <div class="absolute bottom-8 left-8 text-white">
+                            <h4 class="text-2xl font-bold">Immersive Labs</h4>
+                        </div>
+                    </div>
+                    <div class="min-w-[400px] h-[500px] bg-white relative group cursor-pointer overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                        <div class="absolute bottom-8 left-8 text-white">
+                            <h4 class="text-2xl font-bold">Braindates</h4>
+                        </div>
+                    </div>
+                    <div class="min-w-[400px] h-[500px] bg-white relative group cursor-pointer overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                        <div class="absolute bottom-8 left-8 text-white">
+                            <h4 class="text-2xl font-bold">Ecosystem Networking</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center">
+                    <span class="text-lg font-bold uppercase tracking-widest">Highlights</span>
+                    <div class="flex items-center gap-6">
+                        <span class="text-sm font-bold underline cursor-pointer hover:no-underline">(See all)</span>
+                        <div class="flex gap-2">
+                            <button class="w-12 h-12 border border-black flex items-center justify-center hover:bg-black hover:text-white transition-colors">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                            </button>
+                            <button class="w-12 h-12 border border-black flex items-center justify-center hover:bg-black hover:text-white transition-colors">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="relative py-32 px-12 lg:px-24 blue-purple-gradient overflow-hidden text-white">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px]">
+                <div class="abstract-circle bg-red-500 w-full h-full opacity-20"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 relative z-10">
+                <div>
+                    <h2 class="text-8xl font-black tracking-tighter mb-4">5,000+</h2>
+                    <p class="text-xl font-bold uppercase tracking-widest">Participants</p>
+                </div>
+                <div>
+                    <h2 class="text-8xl font-black tracking-tighter mb-4">50+</h2>
+                    <p class="text-xl font-bold uppercase tracking-widest">Countries</p>
+                </div>
+                <div>
+                    <h2 class="text-8xl font-black tracking-tighter mb-4">1,000+</h2>
+                    <p class="text-xl font-bold uppercase tracking-widest">Businesses</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Photo Grid Section -->
+        <section class="py-1 bg-white">
+            <div class="grid grid-cols-2 gap-1">
+                <div class="aspect-[16/10] bg-gray-200 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80&w=1200" class="w-full h-full object-cover" />
+                </div>
+                <div class="aspect-[16/10] bg-gray-200 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&q=80&w=1200" class="w-full h-full object-cover" />
+                </div>
+                <div class="aspect-[16/10] bg-gray-200 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1200" class="w-full h-full object-cover" />
+                </div>
+                <div class="aspect-[16/10] bg-gray-200 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=1200" class="w-full h-full object-cover" />
+                </div>
+            </div>
+        </section>
+
+        <!-- Event Finished Section -->
+        <section class="py-48 px-12 lg:px-24 orange-gradient flex flex-col items-center justify-center text-center text-white relative overflow-hidden">
+            <div class="abstract-circle bg-white w-96 h-96 opacity-10 -top-20"></div>
+            <p class="text-xl font-bold uppercase tracking-[0.2em] mb-8 relative z-10">Event finished</p>
+            <h2 class="text-7xl lg:text-[120px] font-black tracking-tighter leading-none relative z-10">SEE YOU<br/>NEXT YEAR</h2>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-black text-white p-12 lg:p-24 relative">
+            <div class="flex flex-col lg:flex-row justify-between items-start gap-12">
+                <div class="flex flex-col h-full justify-between">
+                    <div>
+                        <button class="bg-white text-black px-6 py-3 font-bold uppercase text-sm tracking-widest hover:bg-gray-200 transition-colors">
+                            Subscribe
+                        </button>
+                    </div>
+                    
+                    <div class="mt-32">
+                        <!-- Abstract Logo -->
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                                <div class="w-6 h-6 bg-black rounded-full"></div>
+                            </div>
+                            <span class="text-4xl font-black italic tracking-tighter">C2</span>
+                        </div>
+                        <p class="text-gray-500 text-sm">2023 © C2 International. All rights reserved.</p>
+                    </div>
+                </div>
+                
+                <div class="w-full lg:w-[500px]">
+                    <div class="orange-gradient p-12 mb-12 relative overflow-hidden">
+                        <div class="relative z-10">
+                            <h3 class="text-4xl font-black mb-8 leading-tight">Secure your seat at the table.</h3>
+                            <div class="flex flex-col gap-4">
+                                <a href="#" class="flex items-center justify-between text-xl font-bold border-b border-white/30 pb-4 group">
+                                    LinkedIn
+                                    <svg class="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                </a>
+                                <a href="#" class="flex items-center justify-between text-xl font-bold border-b border-white/30 pb-4 group">
+                                    Twitter
+                                    <svg class="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                </a>
+                                <a href="#" class="flex items-center justify-between text-xl font-bold border-b border-white/30 pb-4 group">
+                                    Instagram
+                                    <svg class="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-8 text-sm text-gray-400">
+                        <div class="flex flex-col gap-2">
+                            <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                            <a href="#" class="hover:text-white transition-colors">Terms of Use</a>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <a href="#" class="hover:text-white transition-colors">Press Kit</a>
+                            <a href="#" class="hover:text-white transition-colors">Careers</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animations
+        gsap.utils.toArray('section').forEach((section, i) => {
+            const headline = section.querySelector('h1, h2');
+            if (headline) {
+                gsap.from(headline, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 80%",
+                    },
+                    y: 50,
+                    opacity: 0,
+                    duration: 1,
+                    ease: "power3.out"
+                });
+            }
+        });
+
+        // Speaker cards staggered animation
+        gsap.from(".speaker-card", {
+            scrollTrigger: {
+                trigger: ".speaker-card",
+                start: "top 90%",
+            },
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "power2.out"
+        });
+
+        // Abstract circles subtle movement
+        gsap.to(".abstract-circle", {
+            y: "random(-20, 20)",
+            x: "random(-20, 20)",
+            duration: "random(3, 5)",
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut"
+        });
+    </script>
+</body>
+</html>
+\"\"\"
+
+with open("dashboard.html", "w") as f:
+    f.write(html_content)
+
+print("dashboard.html created successfully.")
+"""
+
+interpreter_output = interpreter.execute(code)
+print(interpreter_output)

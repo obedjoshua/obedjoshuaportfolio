@@ -1,1 +1,3 @@
-# Visual_Earth_byObed
+# Obed Joshua's Portfolio
+
+you can access my portfolio [here](obedjoshuaportfolio.vercel.app)
